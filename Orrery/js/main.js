@@ -44,7 +44,7 @@ let B_0 = 77.45779628;
 let Bp = 0.16047689;
 let alfa_0 = 48.33076593;
 let alfap = -0.12534081;
-
+//etst test tes tes
 let T_d = 2460587;
 
 function equation(ini, p, T) {
