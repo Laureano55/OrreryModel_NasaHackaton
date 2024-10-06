@@ -6,11 +6,6 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Crear esfera para el planeta
-var geocircle = new THREE.SphereGeometry(1, 32, 32);
-var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-var sphere = new THREE.Mesh(geocircle, material);
-scene.add(sphere);
 
 // Crear esfera para el Sol
 var solGeo = new THREE.SphereGeometry(4, 32, 32);
@@ -159,12 +154,6 @@ var xyz = []
 function animate() {
     requestAnimationFrame(animate);
 
-    sphere.rotation.x += 0.01;
-    sphere.rotation.y += 0.01;
-
-    sphere.position.x = 10 * Math.cos(angle);
-    sphere.position.z = 10 * Math.sin(angle);
-
     //var xyz = orbit(a_0, e_0, i_0, L_0, B_0, alfa_0, ap, ep, ip, Lp, Bp, alfap, T_d);
     //mercury.position.x = 100 * xyz[0];
     //mercury.position.y = 100 * xyz[1];
@@ -190,7 +179,7 @@ function animate() {
             planetData.planets[i].orbital_parameters.f.value, 
             T_d
         );
-        
+
         planets[i].position.x = 100 * xyz[0];
         planets[i].position.y = 100 * xyz[1];
         planets[i].position.z = 100 * xyz[2];
