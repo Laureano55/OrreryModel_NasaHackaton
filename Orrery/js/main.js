@@ -24,36 +24,48 @@ var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
 var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
 scene.add(mercury);
 
-var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
-var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
-var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
+var venusGeo = new THREE.SphereGeometry(2, 32, 32);
+var venusMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
+var venus = new THREE.Mesh(venusGeo, venusMaterial);
 scene.add(mercury);
 
-var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
-var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
-var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
-scene.add(mercury);
+// Earth
+var earthGeo = new THREE.SphereGeometry(4.5, 32, 32);
+var earthMaterial = new THREE.MeshBasicMaterial({ color: 0x2a79ff });
+var earth = new THREE.Mesh(earthGeo, earthMaterial);
+scene.add(earth);
 
-var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
-var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
-var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
-scene.add(mercury);
+// Mars
+var marsGeo = new THREE.SphereGeometry(3.5, 32, 32);
+var marsMaterial = new THREE.MeshBasicMaterial({ color: 0xff3300 });
+var mars = new THREE.Mesh(marsGeo, marsMaterial);
+scene.add(mars);
 
-var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
-var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
-var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
-scene.add(mercury);
+// Jupiter
+var jupiterGeo = new THREE.SphereGeometry(10, 32, 32);
+var jupiterMaterial = new THREE.MeshBasicMaterial({ color: 0xffb366 });
+var jupiter = new THREE.Mesh(jupiterGeo, jupiterMaterial);
+scene.add(jupiter);
 
-var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
-var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
-var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
-scene.add(mercury);
+// Saturn (excluding rings)
+var saturnGeo = new THREE.SphereGeometry(9, 32, 32);
+var saturnMaterial = new THREE.MeshBasicMaterial({ color: 0xffcc99 });
+var saturn = new THREE.Mesh(saturnGeo, saturnMaterial);
+scene.add(saturn);
 
-var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
-var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
-var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
-scene.add(mercury);
+// Uranus
+var uranusGeo = new THREE.SphereGeometry(7, 32, 32);
+var uranusMaterial = new THREE.MeshBasicMaterial({ color: 0x66ccff });
+var uranus = new THREE.Mesh(uranusGeo, uranusMaterial);
+scene.add(uranus);
 
+// Neptune
+var neptuneGeo = new THREE.SphereGeometry(7, 32, 32);
+var neptuneMaterial = new THREE.MeshBasicMaterial({ color: 0x3366ff });
+var neptune = new THREE.Mesh(neptuneGeo, neptuneMaterial);
+scene.add(neptune);
+
+var planets = [mercury, venus, earth, mars, jupiter, saturn, uranus, neptune];
 // Posicionar la cámara en el centro y alejarla un poco
 camera.position.set(0, 0, 20);
 
@@ -142,7 +154,7 @@ function orbit(a_0, e_0, i_0, L_0, B_0, alfa_0, ap, ep, ip, Lp, Bp, alfap, b, c,
 
 let angle = 0;
 let space = 0;
-
+var xyz = []
 // Animación
 function animate() {
     requestAnimationFrame(animate);
@@ -153,11 +165,36 @@ function animate() {
     sphere.position.x = 10 * Math.cos(angle);
     sphere.position.z = 10 * Math.sin(angle);
 
-    var xyz = orbit(a_0, e_0, i_0, L_0, B_0, alfa_0, ap, ep, ip, Lp, Bp, alfap, T_d);
-    mercury.position.x = 100 * xyz[0];
-    mercury.position.y = 100 * xyz[1];
-    mercury.position.z = 100 * xyz[2];
+    //var xyz = orbit(a_0, e_0, i_0, L_0, B_0, alfa_0, ap, ep, ip, Lp, Bp, alfap, T_d);
+    //mercury.position.x = 100 * xyz[0];
+    //mercury.position.y = 100 * xyz[1];
+    //mercury.position.z = 100 * xyz[2];
 
+    for(let i = 0; i < planets.length; i++) {
+        xyz = orbit(
+            planetData.planets[i].orbital_parameters.a.value, 
+            planetData.planets[i].orbital_parameters.e.value, 
+            planetData.planets[i].orbital_parameters.I.value, 
+            planetData.planets[i].orbital_parameters.L.value, 
+            planetData.planets[i].orbital_parameters.long_peri.value, 
+            planetData.planets[i].orbital_parameters.long_node.value, // Corrected this line
+            planetData.planets[i].orbital_parameters.a.rate, 
+            planetData.planets[i].orbital_parameters.e.rate, 
+            planetData.planets[i].orbital_parameters.I.rate, 
+            planetData.planets[i].orbital_parameters.L.rate,
+            planetData.planets[i].orbital_parameters.long_peri.rate, 
+            planetData.planets[i].orbital_parameters.long_node.rate,
+            planetData.planets[i].orbital_parameters.b.value,
+            planetData.planets[i].orbital_parameters.c.value,
+            planetData.planets[i].orbital_parameters.s.value,
+            planetData.planets[i].orbital_parameters.f.value, 
+            T_d
+        );
+        
+        planets[i].position.x = 100 * xyz[0];
+        planets[i].position.y = 100 * xyz[1];
+        planets[i].position.z = 100 * xyz[2];
+    }
     angle += -0.1;
     T_d += 0.01;
 
