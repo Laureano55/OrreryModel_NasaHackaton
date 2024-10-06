@@ -1,18 +1,28 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js Example</title>
+    <title>Space Turtles Orrery</title>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.146.0/examples/js/controls/OrbitControls.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
-    <h1>Three.js Web Page</h1>
+    <!-- Estrellas para el fondo -->
+    <div class="stars"></div>
+    <!-- Titulo y una pequeña descripción del planetario -->
+    <header>
+        <h1>Space Turtles Orrery</h1>
+        <p>Orrery Web App that Displays Near-Earth Objects</p>
+    </header>
+    <main>
+        <div id="orrery-container"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Space Turtles Orrery. All rights reserved.</p>
+    </footer>
     <script src="js/main.js"></script>
 </body>
 </html>
