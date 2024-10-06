@@ -1,4 +1,5 @@
-/// Configura la escena
+
+/// Configura la 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 var renderer = new THREE.WebGLRenderer();
@@ -23,6 +24,36 @@ var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
 var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
 scene.add(mercury);
 
+var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
+var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
+var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
+scene.add(mercury);
+
+var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
+var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
+var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
+scene.add(mercury);
+
+var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
+var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
+var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
+scene.add(mercury);
+
+var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
+var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
+var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
+scene.add(mercury);
+
+var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
+var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
+var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
+scene.add(mercury);
+
+var mercuryGeo = new THREE.SphereGeometry(2, 32, 32);
+var mercuryMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa10 });
+var mercury = new THREE.Mesh(mercuryGeo, mercuryMaterial);
+scene.add(mercury);
+
 // Posicionar la cámara en el centro y alejarla un poco
 camera.position.set(0, 0, 20);
 
@@ -30,6 +61,9 @@ camera.position.set(0, 0, 20);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableZoom = true; // Permitir zoom con la rueda del mouse
 controls.enablePan = false; // Desactivar el movimiento de paneo (opcional)
+
+
+
 
 // Variables para las fórmulas orbitales
 let a_0 = 0.38709843;
@@ -46,6 +80,9 @@ let alfa_0 = 48.33076593;
 let alfap = -0.12534081;
 //etst test tes tes
 let T_d = 2460587;
+
+
+planetData[0]
 
 function equation(ini, p, T) {
     return ini + p * T;
@@ -76,7 +113,7 @@ function kepler(M, e) {
     return E;
 }
 
-function orbit(a_0, e_0, i_0, L_0, B_0, alfa_0, ap, ep, ip, Lp, Bp, alfap, T_d) {
+function orbit(a_0, e_0, i_0, L_0, B_0, alfa_0, ap, ep, ip, Lp, Bp, alfap, b, c, s, f, T_d) {
     var T = (T_d - 2451245.0) / 36525;
     var a = equation(a_0, ap, T);
     var e = equation(e_0, ep, T);
@@ -86,7 +123,7 @@ function orbit(a_0, e_0, i_0, L_0, B_0, alfa_0, ap, ep, ip, Lp, Bp, alfap, T_d) 
     var alfa = equation(alfa_0, alfap, T);
 
     var w = B - alfa;
-    var M = L - B + T ** 2 + Math.cos(T) + Math.sin(T);
+    var M = L - B + b*(T ** 2) + c*Math.cos(f*T) + s*Math.sin(f*T);
     M = normalizeAngle(M);
     var E = kepler(M, e);
 
@@ -128,6 +165,7 @@ function animate() {
     controls.update();
 
     renderer.render(scene, camera);
+    console.log(planetData);
 }
 
 animate();
