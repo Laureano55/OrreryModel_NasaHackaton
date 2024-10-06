@@ -118,6 +118,7 @@ function animate() {
 
     var xyz = orbit(a_0, e_0, i_0, L_0, B_0, alfa_0, ap, ep, ip, Lp, Bp, alfap, T_d);
     mercury.position.x = 100 * xyz[0];
+    mercury.position.y = 100 * xyz[1];
     mercury.position.z = 100 * xyz[2];
 
     angle += -0.1;
