@@ -67,6 +67,7 @@ const neptuneLabel = createTextLabel('Neptune');
 neptuneLabel.position.set(neptune.position.x, neptune.position.y + 7, neptune.position.z); // Adjust position above the planet
 scene.add(neptuneLabel);
 
+
 const planetLabels = [
     mercuryLabel,
     venusLabel,

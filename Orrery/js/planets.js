@@ -40,11 +40,19 @@ var solMaterial = new THREE.MeshBasicMaterial({
     map: textureLoader.load('textures/sun.jpg')
 });
 
+
+var mooonMaterial = new THREE.MeshBasicMaterial({
+    map: textureLoader.load('textures/moon.jpg')
+});
+
 // Crear esfera para el Sol
-var solGeo = new THREE.SphereGeometry(4, 32, 32);
+var solGeo = new THREE.SphereGeometry(8, 32, 32);
 
 var sol = new THREE.Mesh(solGeo, solMaterial);
 
+var moonGeo = new THREE.SphereGeometry(1.5, 32, 32);
+
+var moon = new THREE.Mesh(moonGeo, moonMaterial);
 
 
 // Crear esfera para Mercurio

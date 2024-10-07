@@ -10,6 +10,7 @@ document.body.appendChild(renderer.domElement);
 var planets = [mercury, venus, earth, mars, jupiter, saturn, uranus, neptune];
 scene.add(sol);
 
+
 for(let i = 0; i < planets.length; i++) {
     
     scene.add(planets[i]);
@@ -113,10 +114,9 @@ function animate() {
             planetData.planets[i].orbital_parameters.f.value, 
             T_d
         );
-
-        planets[i].position.x = 100 * xyz[0];
-        planets[i].position.y = 100 * xyz[1];
-        planets[i].position.z = 100 * xyz[2];
+        planets[i].position.x = (100/(i+1)**1.2) * xyz[0];
+        planets[i].position.y = (100/(i+1)**1.2) * xyz[1];
+        planets[i].position.z = (100/(i+1)**1.2) * xyz[2];
 
         planets[i].rotation.y += 0.1;
         sol.rotation.y += 0.01;
@@ -125,7 +125,7 @@ function animate() {
         planetLabels[i].position.set(planets[i].position.x, planets[i].position.y + 10, planets[i].position.z);
     }
     
-    T_d += 0.001;
+    T_d += 0.01;
 
     // Actualizar los controles (rotación y zoom)
     controls.update();
